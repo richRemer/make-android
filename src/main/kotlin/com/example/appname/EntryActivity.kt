@@ -9,7 +9,7 @@ class EntryActivity: AppCompatActivity() {
         super.onCreate(state)
 
         val label = TextView(this@EntryActivity)
-        label.setText("https://github.com/richRemer/make-android-gradle")
+        label.setText("https://github.com/richRemer/make-android")
 
         setContentView(label)
     }

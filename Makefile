@@ -46,7 +46,7 @@ $(build)/src/%: $(src)/%
 	@mkdir -p $(@D)
 	cp $< $@
 
-$(icon-file): $(src)/image/$(icon).svg
+$(icon-file): $(src)/image/$(icon).svg tool/svg-drawable.xslt
 	xsltproc tool/svg-drawable.xslt $< > $@
 
 .PHONY: default build debug release run env android-home java-home clean always

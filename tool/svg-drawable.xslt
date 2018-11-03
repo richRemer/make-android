@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" exclude-result-prefixes="svg"
+<xsl:stylesheet version="2.0" exclude-result-prefixes="svg"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:svg="http://www.w3.org/2000/svg"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <xsl:output indent="yes" />
+
     <xsl:template match="svg:svg">
-        <vector android:height="24dp" android:width="24dp">
-            <xsl:attribute name="android:viewportHeight">
-                <xsl:value-of select="@height" />
-            </xsl:attribute>
+        <vector android:width="108dp" android:height="108dp">
             <xsl:attribute name="android:viewportWidth">
-                <xsl:value-of select="@width" />
+                <xsl:value-of select="2 * number(substring-before(substring-after(substring-after(@viewBox,' '),' '),' '))" />
             </xsl:attribute>
-            <xsl:apply-templates />
+            <xsl:attribute name="android:viewportHeight">
+                <xsl:value-of select="2 * number(substring-after(substring-after(substring-after(@viewBox,' '),' '),' '))" />
+            </xsl:attribute>
+            <group>
+                <xsl:attribute name="android:translateX">
+                    <xsl:value-of select="0.5 * number(substring-before(substring-after(substring-after(@viewBox,' '),' '),' '))" />
+                </xsl:attribute>
+                <xsl:attribute name="android:translateY">
+                    <xsl:value-of select="0.5 * number(substring-after(substring-after(substring-after(@viewBox,' '),' '),' '))" />
+                </xsl:attribute>
+                <xsl:apply-templates />
+            </group>
         </vector>
     </xsl:template>
 

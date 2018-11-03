@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="2.0" exclude-result-prefixes="svg"
+<xsl:stylesheet version="1.0" exclude-result-prefixes="svg"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:svg="http://www.w3.org/2000/svg"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,6 +31,9 @@
         <path>
             <xsl:attribute name="android:fillColor">
                 <xsl:choose>
+                    <xsl:when test="@android:fillColor">
+                        <xsl:value-of select="@android:fillColor" />
+                    </xsl:when>
                     <xsl:when test="@fill">
                         <xsl:value-of select="@fill" />
                     </xsl:when>

@@ -5,7 +5,7 @@ build = build
 gradle-ver = 4.10.2
 icon = charge
 
-src-files = $(patsubst $(src)/%, $(build)/src/%, $(shell find $(src) -type f))
+src-files = $(patsubst $(src)/%, $(build)/src/%, $(shell find $(src) -type f -not -name *.svg))
 icon-file = $(build)/src/main/res/drawable/$(icon).xml
 build-deps = env $(build)/gradlew $(build)/build.gradle $(src-files) $(icon-file)
 
@@ -46,7 +46,7 @@ $(build)/src/%: $(src)/%
 	@mkdir -p $(@D)
 	cp $< $@
 
-$(icon-file): $(src)/image/$(icon).svg tool/svg-drawable.xslt
+$(icon-file): $(src)/main/res/image/$(icon).svg tool/svg-drawable.xslt
 	xsltproc tool/svg-drawable.xslt $< > $@
 
 .PHONY: default build debug release run env android-home java-home clean always
